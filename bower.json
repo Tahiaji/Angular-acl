@@ -1,0 +1,21 @@
+{
+  "name": "angular-acl",
+  "version": "0.0.5",
+  "homepage": "https://github.com/Tahiaji/angular-acl",
+  "authors": [
+    "Tahiaji <tahiaji@gmail.com>"
+  ],
+  "description": "Role based access control for AngularJS",
+  "main": "angular-acl.js",
+  "keywords": [
+    "acl",
+    "permissions",
+    "roles",
+    "angular"
+  ],
+  "license": "MIT",  
+  "devDependencies": {
+    "angular": "~1.3.17",
+    "angular-mocks": "~1.2.21"
+  }
+}
