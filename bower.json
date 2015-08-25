@@ -6,7 +6,11 @@
     "Tahiaji <tahiaji@gmail.com>"
   ],
   "description": "Role based access control for AngularJS",
-  "main": "angular-acl.js",
+  "main": [
+	"angular-acl.js"
+  ],
+  "ignore": [  
+  ],
   "keywords": [
     "acl",
     "permissions",
