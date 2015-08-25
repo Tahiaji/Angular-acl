@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        <title>Acl</title>
+        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+    </head>
+    <body>
+        <div style="width: 80%; margin: auto;">
+            <h3>Links:</h3>
+            <pre class="prettyprint">
+    <a href="../angular-acl.js">angular-acl.js</a>
+    <a href="http://jsfiddle.net/gbksoft/bLc8549e/">Example (jsfiddle)</a>
+            </pre>
+            <h3>app.js</h3>
+            <pre class="prettyprint">
+        var app = angular.module('App', ['acl']);
+        app.config(function(AclProvider) {
+            AclProvider.config({
+                defaultRole: 'guest',
+                storage: 'localStorage',
+                storageKey: 'o2o',
+                abilities: {
+                    guest: {
+                        actions: {
+                            login: true
+                        }
+                    },
+                    user: {
+                        actions: {
+                            logout: true,
+                            edit: true
+                        },
+                    },
+                    student: {
+                        actions: {
+                            edit: false,
+                        },
+                        roles: ['user']
+                    },
+                    expert: {
+                        actions: {},
+                        roles: ['user']
+                    }
+                }
+            });
+        });
+
+        app.controller('Controller', function($scope, Acl) {
+            $scope.login = function(role) {
+                Acl.login(role);
+            }
+            $scope.logout = function() {
+                Acl.logout();
+            }
+        });
+            </pre>
+            <h3>index.html</h3>
+            <pre class="prettyprint"><xmp>
+    <html ng-app="App">
+        <head>
+            <base href="/">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+            <script src="angular-acl.js"></script>
+            <script src="app.js"></script>
+        </head>
+        <body>
+            <div ng-controller="Controller">
+                <button allow="login" ng-click="login('user')">User Login</button>
+                <button allow="login" ng-click="login('student')">Student Login</button>
+                <button allow="login" ng-click="login('expert')">Expert Login</button>
+                <button allow="logout" ng-click="logout()">Logout</button>
+                <div allowrole="guest">Guest</div>
+                <div allowrole="user">User</div>
+                <div allowrole="student">Student</div>
+                <div allowrole="expert">Expert</div>
+                <div allow="login">Allow Login</div>
+                <div allow="logout">Allow Logout</div>
+                <div allow="edit">Allow Edit</div>
+                
+                
+                 <div denyrole="user">User</div> <!--new directive - allow for all exept this (0.0.5) -->
+                
+            </div>
+        </body>
+    </html>
+    </xmp></pre>
+        </div>
+    </body>
+</html>
+
