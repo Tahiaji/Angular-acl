@@ -30,7 +30,7 @@ angular.module('acl').provider('Acl', [
             storage: 'sessionStorage',
             storageKey: 'Acl',
             permissions: {},
-            emptyActionDefault: 'false'//defaut rights if no action
+            emptyActionDefault: false//defaut rights if no action
         }
 
         var data = {
