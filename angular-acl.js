@@ -162,13 +162,18 @@ angular.module('acl').provider('Acl', [
                             if (actions[action](Acl.user, params)) {
                                 return 1;
                             }
-                        } else {
-                            return 1;
                         }
+                        return 1;
+                    } else {//find .*
+                        angular.forEach(actions, function (value, key) {
+                            var re = new RegExp(key, 'gi');
+                            if (re.test(action)) {
+                                return value ? 1 : 2;
+                            }
+                        })
                     }
                 }
-                if (roles = getRoleRoles(role)) {
-                    //console.log('roles', roles);
+                if (roles = getRoleRoles(role)) {                   
                     for (var key = 0; key < roles.length; key++) {
                         if (can(action, roles[key])) {//if action exis - return it!
                             return can(action, roles[key]);
