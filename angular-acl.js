@@ -165,12 +165,16 @@ angular.module('acl').provider('Acl', [
                         }
                         return 1;
                     } else {//find .*
+                        var res = 0;
                         angular.forEach(actions, function (value, key) {
                             var re = new RegExp(key, 'gi');
-                            if (re.test(action)) {
-                                return value ? 1 : 2;
+                            if (re.test(action)) {                                   
+                                res =  value ? 1 : 2;//can't return from foreach
                             }
                         })
+                        if(res){
+                            return res;
+                        }
                     }
                 }
                 if (roles = getRoleRoles(role)) {                   
