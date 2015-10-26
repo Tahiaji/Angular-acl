@@ -1,11 +1,12 @@
 /**
- * version 0.0.5
+ * version 0.0.9
  * @author  
  * Based on https://github.com/mikemclin/angular-acl
  * and it's modification by Alex Gorovyi
  * Edited by Tahiaji
- * 
+ *
  * tested with AngularJS v1.2.28 
+ * tested with AngularJS v1.3.18 
  */
 'use strict';
 angular.module('acl', []);
@@ -167,9 +168,11 @@ angular.module('acl').provider('Acl', [
                     } else {//find .*
                         var res = 0;
                         angular.forEach(actions, function (value, key) {
-                            var re = new RegExp(key, 'gi');
-                            if (re.test(action)) {                                   
-                                res =  value ? 1 : 2;//can't return from foreach
+                           if (key.indexOf('*') != -1) {                                
+                                var re = new RegExp(key, 'gi');
+                                if (re.test(action)) {
+                                    res = value ? 1 : 2;//can't return from foreach
+                                }
                             }
                         })
                         if(res){
